@@ -3,6 +3,8 @@ This repository contains the code used to analyze the population genetic data (I
 
 The manuscript associated with this data can be found at:
 High-Resolution Population Genetic Structure of Tawny Crazy Ant (Nylanderia fulva Mayr: Hymenoptera: Formicidae) from the Origin in South America and Introduced Regions of the United States
+
+Authors:
 Jocelyn R. Holt (1,2), James Montoya Lerma (3), Luis A. Calcaterra (4), Tyler J. Raszick (1), and Raul F. Medina (1)
 
 Affiliations:
