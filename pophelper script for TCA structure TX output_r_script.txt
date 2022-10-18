@@ -1,0 +1,46 @@
+#pophelper script for TCA structure output
+#Don't forget to set your working directory! I recommend setting it to the directory #where you have your STRUCTURE results files and NOTHING ELSE.
+
+#install.packages(c("devtools","ggplot2","gridExtra","gtable","label.switching","tidyr"),dependencies=T)
+
+#only need to install program code once
+install_github('royfrancis/pophelper')
+
+#load the libraries
+library(devtools)
+library(pophelper)
+library(gridExtra)
+
+#set working directory. this should be the results folder that contains all the ks from structure
+#setwd("~/Desktop/tca_data/structure_output_data_sept_2021/results") #for entire dataset of TCA from North and South America
+setwd("~/Desktop/tca_data/tca_tx_structure_output_aug2022/results") #for TX only samples
+
+
+# STRUCTURE files (do not use this command to read local files)
+#sfiles <- list.files(path=PUT PATH HERE, full.names=T) # <-- Look carefully here! You must put in 
+#the path where you have put the results files. No other files can be in that directory!
+
+#sfiles <- list.files(path="~/Desktop/tca_data/structure_output_data_sept_2021/results", full.names=T)
+sfiles <- list.files(path="~/Desktop/tca_data/tca_tx_structure_output_aug2022/results", full.names=T)
+
+# basic usage
+slist <- readQ(files=sfiles)
+
+readQ(files=sfiles,filetype="structure")  #advanced usage, select files #readQ(files=choose.files(multi = TRUE))
+
+
+sr1 <- summariseQ(tabulateQ(slist))
+
+
+# generate input files for CLUMPP from STRUCTURE files
+sfiles <- list.files(path=system.file("files/structure",package="pophelper"), full.names=TRUE) 
+clumppExport(readQ(sfiles),exportpath=getwd())
+
+
+write.csv(evannoMethodStructure(sr1), "evannoMethodStructure.csv", na = "") 
+
+p <- evannoMethodStructure(data=sr1,exportplot=F,returnplot=T,returndata=F,basesize=12,linesize=0.7)
+
+grid.arrange(p)
+
+
